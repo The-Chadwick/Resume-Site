@@ -3,7 +3,6 @@
 class Post {
 	// DB Connection
 	private $conn;
-	private $table = 'posts';
 	
 	// Post Properties
 	public $id;
@@ -19,10 +18,17 @@ class Post {
 		$this->conn = $db;
 	}
 	
-	// Read Posts
-	public function readPost(){
-//		$query = 'SELECT category.name as categoryName, posts.id, posts.title, posts.body, posts.author, posts.createDate FROM' . $this->table . ' posts LEFT JOIN  categories c ON posts.caregoryID = c.id ORDER BY posts.createDate DESC';
-		$query = 'SELECT * FROM posts';
+	// Return List of Posts
+	public function getPosts(){
+		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id ORDER BY posts.createDate DESC';
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+		return $stmt;
+	}
+	
+	// Return Single Post
+	public function readPost($id){
+		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.body, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id WHERE posts.id = 1';
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 		return $stmt;

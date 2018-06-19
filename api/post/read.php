@@ -15,7 +15,7 @@ $db = $database->connect();
 $post = new Post($db);
 
 // Blog Post Query
-$result = $post->readPost();
+$result = $post->getPosts();
 $rowCount = $result->rowCount();
 if($rowCount > 0){
 	// Array of posts
@@ -26,9 +26,7 @@ if($rowCount > 0){
 		$postItem = array(
 			'id' => $id,
 			'title' => $title,
-			'body' => html_entity_decode($body),
 			'author' => $author,
-			'categoryID' => $categoryID,
 			'categoryName' => $categoryName,
 			'createDate' => $createDate
 		);
