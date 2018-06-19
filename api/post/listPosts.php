@@ -14,8 +14,8 @@ $db = $database->connect();
 // Instantiate blog post object
 $post = new Post($db);
 
-// Blog Post Query
-$result = $post->getPosts();
+// List of Posts
+$result = $post->listPosts();
 $rowCount = $result->rowCount();
 if($rowCount > 0){
 	// Array of posts
@@ -41,6 +41,5 @@ if($rowCount > 0){
 	// No posts found in database
 	echo json_encode(array('message' => 'No Posts Found'));
 }
-
 
 ?>

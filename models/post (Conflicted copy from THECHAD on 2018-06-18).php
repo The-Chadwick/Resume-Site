@@ -28,7 +28,7 @@ class Post {
 	
 	// Return Single Post
 	public function getPost($id){
-		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.body, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id WHERE posts.id = 1';
+		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.body, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id WHERE posts.id = ' $id;
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 		return $stmt;
