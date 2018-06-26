@@ -20,7 +20,7 @@ class Post {
 	
 	// Return List of Posts
 	public function listPosts(){
-		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id ORDER BY posts.createDate DESC';
+		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.author, posts.createDate, posts.body FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id ORDER BY posts.createDate DESC';
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 		return $stmt;
@@ -28,7 +28,15 @@ class Post {
 	
 	// Return Single Post
 	public function getPost($id){
-		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.body, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id WHERE posts.id = 1';
+		$query = 'SELECT posts.id, categories.name as categoryName, posts.title, posts.body, posts.author, posts.createDate FROM posts LEFT OUTER JOIN categories ON posts.categoryID = categories.id WHERE posts.id = ' . $id;
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+		return $stmt;
+	}
+	
+	// Return list of Updates for a Single Post base on Post ID
+	public function getUpdates($id){
+		$query = 'SELECT body, createDate FROM postupdates WHERE postID = ' . $id;
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 		return $stmt;

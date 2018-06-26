@@ -1,7 +1,9 @@
 <?php
 /*
 
-Will return a JSON list of all posts
+Will return updates in JSON format
+updates are written in twitter style
+-> 160 character messages
 
 */
 
@@ -30,9 +32,8 @@ if($rowCount > 0){
 		extract($row);
 		$postItem = array(
 			'id' => $id,
-			'title' => $title,
-			'author' => $author,
-			'categoryName' => $categoryName,
+			'postID' => $postID,
+			'body' => $body,
 			'createDate' => $createDate
 		);
 		
