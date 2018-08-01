@@ -43,7 +43,15 @@ class Post {
 	}
 	
 	// Add Post
-	public function addPost(){
+	public function addPost($categoryID, $title, $body, $author){
+		$query = 'INSERT INTO `posts` (`categoryID`, `title`, `body`, `author`, `createDate`) VALUES (' . $categoryID . ', ' . $title . ', ' . $body . ', ' . $author .', CURRENT_TIMESTAMP)';
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+		return 'sall goodman';
+	}
+	
+	// Add Project Update
+	public function addProjectUpdate(){
 		$query = 'INSERT INTO';
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
